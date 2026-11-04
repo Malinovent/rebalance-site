@@ -5,7 +5,8 @@ import "@fontsource/spline-sans-mono/latin-500.css";
 import "./styles.css";
 import { functionsBase, sendHit, sendSignup } from "./lib/api";
 import { readHeadline } from "./lib/headline";
-import { LANG_KEY, isLang } from "./lib/lang";
+import { isLang } from "./lib/lang";
+import { wireLangSwitch } from "./lib/langSwitch";
 import { SOURCE_KEY, resolveSource } from "./lib/source";
 import { CONSENT_VERSION, validateWaitlist } from "./lib/waitlist";
 
@@ -35,17 +36,7 @@ try {
 }
 if (!counted) sendHit(base, { page: lang, headline, src });
 
-// Language switch: remember the choice for the root URL, keep ?src= on the way.
-document.querySelectorAll<HTMLAnchorElement>("a[data-lang]").forEach((a) => {
-  a.addEventListener("click", () => {
-    try {
-      localStorage.setItem(LANG_KEY, a.dataset.lang ?? "");
-    } catch {
-      /* storage blocked */
-    }
-  });
-  if (location.search) a.href = a.pathname + location.search;
-});
+wireLangSwitch(document, location.search);
 
 // Waitlist form.
 const form = document.querySelector<HTMLFormElement>("form[data-waitlist]");

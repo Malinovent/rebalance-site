@@ -24,9 +24,11 @@ npm run links -- https://your-domain.ca   # tagged ?src= links
 
 - `src/config.ts`: every value JP still has to decide (name, seller, sync term, notice, merchant, privacy officer, contact, sync region)
 - `src/i18n/fr.ts`, `src/i18n/en.ts`: all page text; `types.ts` lists the keys, and tests check both languages match
-- `src/render/landing.ts`, `src/render/document.ts`: the page HTML, built by the plugin in `vite.config.ts`
+- `src/render/landing.ts`, `src/render/legal.ts`, `src/render/chrome.ts` (shared header and footer), `src/render/document.ts` (page shells and the route list): the page HTML, built by the plugin in `vite.config.ts`
+- `src/legal/fr.ts` (official), `src/legal/en.ts`: Terms, Privacy, Refunds and What lifetime means; `docs/LEGAL-REVIEW.md` lists what JP must fill in or decide
+- `fr/*/index.html`, `en/*/index.html`: stub entry files the plugin replaces
 - `src/lib/`: pure logic with tests (language pick, A/B headline, traffic source, waitlist checks)
-- `src/main.ts`, `src/root.ts`: browser scripts for the landing pages and the root redirect
+- `src/main.ts`, `src/page.ts`, `src/root.ts`: browser scripts for the landing pages (visit count, waitlist), the legal pages (language switch only) and the root redirect
 - `scoreboard/index.html`, `src/scoreboard.ts`, `src/render/scoreboard.ts`, `src/i18n/scoreboard.ts`: JP's private scoreboard at `/scoreboard/`
 - `src/styles.css`: Cadence look (paper, ink, Fraunces, Spline Sans Mono)
 - `supabase/presale.sql`: pre-sale tables (purchases, entitlements, waitlist, hits); `supabase/SETUP.md`: setup steps for JP

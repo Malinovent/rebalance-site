@@ -21,4 +21,14 @@ export const CONFIG = {
   priceCad: 39,
   /** The year the early-bird price ends; dates themselves are in the strings. */
   year: 2026,
+
+  // Legal pages. Values marked PROPOSED are Claude's suggestions in the drafts; JP confirms or changes them.
+  /** PROPOSED: refund on request, no reason needed, within this many days of purchase. */
+  refundDays: 30,
+  /** PROPOSED: if the phone apps aren't out by this date, every early bird can ask for a full refund. */
+  appsDeadline: { fr: "30 juin 2027", en: "June 30, 2027" },
+  /** Date shown as "last updated" on the legal pages. */
+  legalUpdated: { fr: "4 novembre 2026", en: "November 4, 2026" },
+  /** The email service for waitlist emails, once JP picks one (or remove that line from the privacy policy). */
+  emailTool: "[EMAIL TOOL]",
 } as const;

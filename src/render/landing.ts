@@ -1,10 +1,8 @@
-import { CONFIG } from "../config";
 import { fill, strings } from "../i18n";
 import type { Lang } from "../lib/lang";
+import { esc, renderFooter, renderHeader } from "./chrome";
 
-/** Escapes text for HTML content and attribute values. */
-export const esc = (s: string): string =>
-  s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+export { esc };
 
 /**
  * The landing page <body> content for one language, rendered at build time (see vite.config.ts),
@@ -14,7 +12,6 @@ export function renderLanding(lang: Lang): string {
   const s = strings(lang);
   const t = (x: string) => esc(fill(x, lang));
   const other: Lang = lang === "fr" ? "en" : "fr";
-  const otherLang = other === "fr" ? "fr-CA" : "en-CA";
   const p = s.paths;
 
   const bars = `
@@ -64,18 +61,7 @@ export function renderLanding(lang: Lang): string {
     .join("");
 
   return `
-  <a class="skip" href="#main">${t(s.skipToContent)}</a>
-  <header class="top">
-    <div class="wrap top-row">
-      <p class="brand"><a href="/${lang}/">${esc(CONFIG.app)}</a><span class="brand-note">${t(s.nav.earlyUntil)}</span></p>
-      <nav aria-label="Sections">
-        <a href="#how">${t(s.nav.how)}</a>
-        <a href="#offer">${t(s.nav.offer)}</a>
-        <a href="#faq">${t(s.nav.faq)}</a>
-        <a class="lang-switch" href="/${other}/" hreflang="${otherLang}" lang="${otherLang}" data-lang="${other}" aria-label="${t(s.nav.switchLangLabel)}">${t(s.nav.switchLang)}</a>
-      </nav>
-    </div>
-  </header>
+${renderHeader(lang, { onLanding: true, otherPath: `/${other}/` })}
 
   <main id="main">
     <section class="hero">
@@ -146,19 +132,7 @@ export function renderLanding(lang: Lang): string {
     </section>
   </main>
 
-  <footer class="foot">
-    <div class="wrap">
-      <ul class="foot-links">
-        <li><a href="${p.terms}">${t(s.footer.links.terms)}</a></li>
-        <li><a href="${p.privacy}">${t(s.footer.links.privacy)}</a></li>
-        <li><a href="${p.refunds}">${t(s.footer.links.refunds)}</a></li>
-        <li><a href="${p.lifetime}">${t(s.footer.links.lifetime)}</a></li>
-        <li><a href="mailto:${esc(CONFIG.contactEmail)}">${t(s.footer.links.contact)}</a></li>
-      </ul>
-      <p class="small">${t(s.footer.officer)}</p>
-      <p class="small">${t(s.footer.disclaimer)}</p>
-    </div>
-  </footer>`;
+${renderFooter(lang)}`;
 }
 
 /** Text the client script needs (form messages), embedded as JSON in the page. */

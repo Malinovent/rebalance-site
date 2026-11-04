@@ -1,17 +1,19 @@
 import { resolve } from "node:path";
 import { loadEnv, type Plugin } from "vite";
 import { defineConfig } from "vitest/config";
-import { renderDocument } from "./src/render/document";
+import { pageRoutes, renderDocument, renderLegalDocument } from "./src/render/document";
 
-/** Renders /fr/ and /en/ from the translation files at build and dev time (no JS needed to read the page). */
+/** Renders /fr/, /en/ and the legal pages from the translation files at build and dev time (no JS needed to read the page). */
 function landingPages(siteUrl: string): Plugin {
+  const routes = pageRoutes();
   return {
     name: "landing-pages",
     transformIndexHtml: {
       order: "pre",
       handler(html, ctx) {
-        const m = /^\/(fr|en)\/index\.html$/.exec(ctx.path);
-        return m ? renderDocument(m[1] as "fr" | "en", siteUrl) : html;
+        const route = routes.get(ctx.path);
+        if (!route) return html;
+        return route.key === "landing" ? renderDocument(route.lang, siteUrl) : renderLegalDocument(route.lang, route.key, siteUrl);
       },
     },
   };
@@ -25,8 +27,8 @@ export default defineConfig(({ mode }) => ({
     rollupOptions: {
       input: {
         root: resolve(__dirname, "index.html"),
-        fr: resolve(__dirname, "fr/index.html"),
-        en: resolve(__dirname, "en/index.html"),
+        // fr/, en/ and every legal page: stub files rendered by the plugin above.
+        ...Object.fromEntries([...pageRoutes().keys()].map((p) => [p.slice(1, -"/index.html".length).replace(/\//g, "-"), resolve(__dirname, p.slice(1))])),
         scoreboard: resolve(__dirname, "scoreboard/index.html"),
       },
     },

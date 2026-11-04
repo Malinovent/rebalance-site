@@ -19,6 +19,10 @@ export function fill(text: string, lang: Lang): string {
     contactEmail: CONFIG.contactEmail,
     syncRegion: CONFIG.syncRegion[lang],
     price: String(CONFIG.priceCad),
+    refundDays: String(CONFIG.refundDays),
+    appsDeadline: CONFIG.appsDeadline[lang],
+    legalUpdated: CONFIG.legalUpdated[lang],
+    emailTool: CONFIG.emailTool,
   };
   return text.replace(/\{(\w+)\}/g, (m, key: string) => values[key] ?? m);
 }
