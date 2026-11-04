@@ -3,21 +3,28 @@ import "@fontsource-variable/fraunces/opsz.css";
 import "@fontsource/spline-sans-mono/latin-400.css";
 import "@fontsource/spline-sans-mono/latin-500.css";
 import "./styles.css";
-import { LANG_KEY } from "./lib/lang";
+import { functionsBase, sendHit, sendSignup } from "./lib/api";
+import { readHeadline } from "./lib/headline";
+import { LANG_KEY, isLang } from "./lib/lang";
 import { SOURCE_KEY, resolveSource } from "./lib/source";
-import { validateWaitlist } from "./lib/waitlist";
+import { CONSENT_VERSION, validateWaitlist } from "./lib/waitlist";
 
 const msgs = JSON.parse(document.getElementById("i18n")?.textContent ?? "{}") as Record<string, string>;
+const base = functionsBase(import.meta.env.VITE_SUPABASE_URL);
+const lang = isLang(document.body.dataset.lang) ? document.body.dataset.lang : "fr";
+const headline = readHeadline(document.documentElement);
 
-// Traffic source for this session (S0.3 sends it with hits, signups and purchases).
+// Traffic source for this session: sent with the visit count and the waitlist signup.
+let src = resolveSource(location.search, document.referrer, location.hostname, null);
 try {
-  sessionStorage.setItem(
-    SOURCE_KEY,
-    resolveSource(location.search, document.referrer, location.hostname, sessionStorage.getItem(SOURCE_KEY)),
-  );
+  src = resolveSource(location.search, document.referrer, location.hostname, sessionStorage.getItem(SOURCE_KEY));
+  sessionStorage.setItem(SOURCE_KEY, src);
 } catch {
-  /* storage blocked */
+  /* storage blocked: keep this page's own value */
 }
+
+// One visit count per page load: day, page, headline and source only.
+sendHit(base, { page: lang, headline, src });
 
 // Language switch: remember the choice for the root URL, keep ?src= on the way.
 document.querySelectorAll<HTMLAnchorElement>("a[data-lang]").forEach((a) => {
@@ -31,27 +38,53 @@ document.querySelectorAll<HTMLAnchorElement>("a[data-lang]").forEach((a) => {
   if (location.search) a.href = a.pathname + location.search;
 });
 
-// Waitlist form: client checks now; storage arrives with the waitlist function (S0.3).
+// Waitlist form.
 const form = document.querySelector<HTMLFormElement>("form[data-waitlist]");
 if (form) {
   const msg = form.querySelector<HTMLElement>(".msg")!;
   const email = form.querySelector<HTMLInputElement>('input[name="email"]')!;
   const consent = form.querySelector<HTMLInputElement>('input[name="consent"]')!;
-  form.addEventListener("submit", (e) => {
+  const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+  const say = (text: string, kind: "error" | "info") => {
+    msg.dataset.kind = kind;
+    msg.textContent = text;
+  };
+
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
+    if (button.disabled) return;
     const err = validateWaitlist({ email: email.value, consent: consent.checked });
     email.setAttribute("aria-invalid", String(err === "email"));
-    msg.dataset.kind = err ? "error" : "info";
     if (err === "email") {
-      msg.textContent = msgs.errorEmail;
+      say(msgs.errorEmail, "error");
       email.focus();
       return;
     }
     if (err === "consent") {
-      msg.textContent = msgs.errorConsent;
+      say(msgs.errorConsent, "error");
       consent.focus();
       return;
     }
-    msg.textContent = msgs.notOpen;
+    button.disabled = true;
+    say(msgs.sending, "info");
+    const result = await sendSignup(base, {
+      email: email.value.trim(),
+      consent: true,
+      lang,
+      consentVersion: CONSENT_VERSION,
+      headline,
+      src,
+    });
+    button.disabled = false;
+    if (result === "ok") {
+      say(msgs.done, "info");
+      form.reset();
+    } else if (result === "invalid") {
+      say(msgs.errorEmail, "error");
+    } else if (result === "closed") {
+      say(msgs.notOpen, "info");
+    } else {
+      say(msgs.failed, "error");
+    }
   });
 }

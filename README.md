@@ -17,6 +17,7 @@ npm run dev     # http://localhost:5173/fr/
 npm test        # Vitest
 npm run lint
 npm run build   # type-check + build to dist/
+npm run links -- https://your-domain.ca   # tagged ?src= links
 ```
 
 ## Where things live
@@ -27,6 +28,9 @@ npm run build   # type-check + build to dist/
 - `src/lib/`: pure logic with tests (language pick, A/B headline, traffic source, waitlist checks)
 - `src/main.ts`, `src/root.ts`: browser scripts for the landing pages and the root redirect
 - `src/styles.css`: Cadence look (paper, ink, Fraunces, Spline Sans Mono)
+- `supabase/presale.sql`: pre-sale tables (purchases, entitlements, waitlist, hits); `supabase/SETUP.md`: setup steps for JP
+- `supabase/functions/`: edge functions `hit` and `waitlist`; logic in `_shared/rules.ts` and `_shared/handlers.ts` (tested with Vitest), Deno wiring in each `index.ts`
+- `src/lib/api.ts`: calls to the functions (text/plain bodies, no preflight)
 - `.github/workflows/deploy.yml`: test, lint, build and publish to GitHub Pages on push to `main`
 
 ## Privacy rules built in

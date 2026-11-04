@@ -14,5 +14,6 @@
     "noEmit": true,
     "allowImportingTsExtensions": true
   },
-  "include": ["src", "vite.config.ts"]
+  "include": ["src", "vite.config.ts", "supabase/functions/_shared"],
+  "exclude": ["supabase/functions/_shared/db.ts"]
 }

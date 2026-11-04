@@ -1,0 +1,6 @@
+# Only the settings this site needs. The landing page calls these without a Supabase JWT.
+[functions.hit]
+verify_jwt = false
+
+[functions.waitlist]
+verify_jwt = false
