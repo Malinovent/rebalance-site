@@ -176,3 +176,22 @@ p { margin: 0; }
 @media (min-width: 960px) {
   .hero-grid { grid-template-columns: 1.1fr 1fr; gap: 56px; }
 }
+
+/* private scoreboard */
+.sb { padding-top: 40px; padding-bottom: 64px; }
+.sb-title { font-size: 38px; margin-bottom: 10px; }
+.sb .lead { margin-bottom: 24px; }
+.sb-code { display: grid; gap: 10px; max-width: 440px; }
+.sb-code-row { display: flex; gap: 10px; }
+.sb-code input { flex: 1; min-height: 48px; padding: 10px 12px; border: 1.5px solid var(--ink); border-radius: 2px; background: #fff; font: 17px var(--serif); }
+.sb-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+.sb-slice { border-top: 1px solid var(--line); padding-top: 24px; margin-top: 28px; }
+.sb-slice h2 { font-size: 26px; margin-bottom: 14px; }
+.sb-scroll { overflow-x: auto; margin-bottom: 20px; }
+.sb-table { border-collapse: collapse; width: 100%; min-width: 760px; background: var(--card); font-size: 15px; }
+.sb-table caption { text-align: left; font: 500 12px var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding-bottom: 8px; }
+.sb-table th, .sb-table td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: right; font-variant-numeric: tabular-nums; }
+.sb-table th:first-child, .sb-table td:first-child { text-align: left; max-width: 320px; }
+.sb-table thead th { font: 500 12px var(--mono); letter-spacing: 0.04em; color: var(--muted); border-bottom: 1.5px solid var(--ink); }
+.sb-table tbody th { font-weight: 400; }
+.sb-table code { font-family: var(--mono); font-size: 13px; }

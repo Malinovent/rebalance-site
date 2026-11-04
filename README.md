@@ -27,15 +27,16 @@ npm run links -- https://your-domain.ca   # tagged ?src= links
 - `src/render/landing.ts`, `src/render/document.ts`: the page HTML, built by the plugin in `vite.config.ts`
 - `src/lib/`: pure logic with tests (language pick, A/B headline, traffic source, waitlist checks)
 - `src/main.ts`, `src/root.ts`: browser scripts for the landing pages and the root redirect
+- `scoreboard/index.html`, `src/scoreboard.ts`, `src/render/scoreboard.ts`, `src/i18n/scoreboard.ts`: JP's private scoreboard at `/scoreboard/`
 - `src/styles.css`: Cadence look (paper, ink, Fraunces, Spline Sans Mono)
 - `supabase/presale.sql`: pre-sale tables (purchases, entitlements, waitlist, hits); `supabase/SETUP.md`: setup steps for JP
-- `supabase/functions/`: edge functions `hit` and `waitlist`; logic in `_shared/rules.ts` and `_shared/handlers.ts` (tested with Vitest), Deno wiring in each `index.ts`
+- `supabase/functions/`: edge functions `hit`, `waitlist` and `scoreboard`; logic in `_shared/rules.ts`, `_shared/scoreboard.ts` and `_shared/handlers.ts` (tested with Vitest), Deno wiring in each `index.ts`
 - `src/lib/api.ts`: calls to the functions (text/plain bodies, no preflight)
 - `.github/workflows/deploy.yml`: test, lint, build and publish to GitHub Pages on push to `main`
 
 ## Privacy rules built in
 
-- Headline A or B is kept in `sessionStorage` (`hl`), the traffic source in `sessionStorage` (`src`), the language choice in `localStorage` (`lang`). No cookies.
+- Headline A or B is kept in `sessionStorage` (`hl`), the traffic source in `sessionStorage` (`src`), whether this session was already counted in `sessionStorage` (`counted`), the language choice in `localStorage` (`lang`). No cookies.
 - Fonts are self-hosted. The only third-party request allowed is the checkout (S0.4).
 
 ## Before launch

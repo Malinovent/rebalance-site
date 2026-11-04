@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { handleHit, handleWaitlist } from "./handlers.ts";
+import { handleHit, handleScoreboard, handleWaitlist, sameSecret } from "./handlers.ts";
 import type { Hit, Signup } from "./rules.ts";
 
 const ORIGIN = "https://site.ca";
@@ -86,5 +86,44 @@ describe("handleWaitlist", () => {
     expect(res.status).toBe(400);
     expect(await res.json()).toEqual({ error: "consent" });
     expect(rows).toEqual([]);
+  });
+});
+
+describe("handleScoreboard", () => {
+  const deps = (token = "s3cret-token") => ({
+    allowedOrigins: [ORIGIN],
+    now,
+    token,
+    load: async () => ({
+      hits: [{ day: "2026-11-20", page: "fr", headline: "a", src: "friend", count: 3 }],
+      signups: [],
+      purchases: [],
+    }),
+  });
+
+  it("answers counts with the right token", async () => {
+    const res = await handleScoreboard(post({ token: "s3cret-token" }), deps());
+    expect(res.status).toBe(200);
+    expect(res.headers.get("Cache-Control")).toBe("no-store");
+    const sb = await res.json();
+    expect(sb.allTime.total.visitors).toBe(3);
+    expect(JSON.stringify(sb)).not.toContain("@");
+  });
+  it("refuses a wrong, missing or unset token", async () => {
+    expect((await handleScoreboard(post({ token: "nope" }), deps())).status).toBe(401);
+    expect((await handleScoreboard(post({}), deps())).status).toBe(401);
+    expect((await handleScoreboard(post({ token: "" }), deps(""))).status).toBe(401);
+  });
+  it("refuses other origins", async () => {
+    expect((await handleScoreboard(post({ token: "s3cret-token" }, "https://evil.example"), deps())).status).toBe(403);
+  });
+});
+
+describe("sameSecret", () => {
+  it("compares exactly", () => {
+    expect(sameSecret("abc", "abc")).toBe(true);
+    expect(sameSecret("abc", "abd")).toBe(false);
+    expect(sameSecret("abc", "abcd")).toBe(false);
+    expect(sameSecret("", "")).toBe(true);
   });
 });

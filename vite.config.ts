@@ -27,6 +27,7 @@ export default defineConfig(({ mode }) => ({
         root: resolve(__dirname, "index.html"),
         fr: resolve(__dirname, "fr/index.html"),
         en: resolve(__dirname, "en/index.html"),
+        scoreboard: resolve(__dirname, "scoreboard/index.html"),
       },
     },
   },

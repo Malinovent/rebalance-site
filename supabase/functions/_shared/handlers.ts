@@ -1,6 +1,7 @@
 // Request handlers with their storage injected, so they run under Vitest (Node has Request/Response)
 // and under Deno in the edge functions alike.
 import { corsHeaders, montrealDay, parseHit, parseSignup, type Hit, type Signup } from "./rules.ts";
+import { buildScoreboard, type HitRow, type PurchaseRow, type SignupRow } from "./scoreboard.ts";
 
 export type HitDeps = {
   allowedOrigins: readonly string[];
@@ -66,4 +67,36 @@ export async function handleWaitlist(req: Request, deps: WaitlistDeps): Promise<
     return json(500, { error: "store" }, g);
   }
   return json(200, { ok: true }, g);
+}
+
+export type ScoreboardDeps = {
+  allowedOrigins: readonly string[];
+  now: () => Date;
+  /** The SCOREBOARD_TOKEN secret; an empty value turns the scoreboard off. */
+  token: string;
+  load: () => Promise<{ hits: HitRow[]; signups: SignupRow[]; purchases: PurchaseRow[] }>;
+};
+
+/** Compares two strings in time that depends only on their length. */
+export function sameSecret(a: string, b: string): boolean {
+  const ea = new TextEncoder().encode(a);
+  const eb = new TextEncoder().encode(b);
+  let diff = ea.length ^ eb.length;
+  for (let i = 0; i < Math.max(ea.length, eb.length); i++) diff |= (ea[i] ?? 0) ^ (eb[i] ?? 0);
+  return diff === 0;
+}
+
+/** POST {token}. Answers counts only, never emails. */
+export async function handleScoreboard(req: Request, deps: ScoreboardDeps): Promise<Response> {
+  const g = gate(req, deps.allowedOrigins);
+  if (g instanceof Response) return g;
+  const body = await readJson(req);
+  const token = body && typeof body === "object" && "token" in body ? (body as { token: unknown }).token : null;
+  if (!deps.token || typeof token !== "string" || !sameSecret(token, deps.token)) return json(401, { error: "token" }, g);
+  try {
+    const { hits, signups, purchases } = await deps.load();
+    return json(200, buildScoreboard(hits, signups, purchases, deps.now()), { ...g, "Cache-Control": "no-store" });
+  } catch {
+    return json(500, { error: "store" }, g);
+  }
 }
