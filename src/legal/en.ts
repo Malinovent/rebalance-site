@@ -1,6 +1,6 @@
 import type { LegalStrings } from "./types";
 
-// DRAFT for JP's review (and ideally a lawyer's). Canadian English translation; the French version prevails.
+// Canadian English translation; the French version prevails.
 export const legalEn: LegalStrings = {
   updated: "Last updated: {legalUpdated}",
   translationNote: "This is an English translation for your convenience. The French version is the official one.",
@@ -13,13 +13,14 @@ export const legalEn: LegalStrings = {
         {
           h: "Who sells you {app}",
           body: [
-            "{app} is offered by {seller}, in Quebec. Payment is handled by {merchant}, our authorized reseller: it takes the payment, collects the taxes and sends your receipt. Its own terms apply to the payment.",
+            "{app} is made and sold by {seller}, a sole proprietor in Quebec, Canada, who builds and runs {app}.",
+            "Our order process is conducted by our online reseller Paddle.com. Paddle.com is the Merchant of Record for all our orders. Paddle provides all customer service inquiries and handles returns. It takes the payment, collects the taxes and sends your receipt; its own buyer terms also apply to the payment.",
           ],
         },
         {
           h: "What you're buying",
           body: [
-            "The early bird costs ${price} CAD once, plus applicable taxes. It's offered until December 20, 2026. It includes:",
+            "The early bird costs ${price} USD once, plus applicable taxes. It's offered until December 20, 2026. It includes:",
             [
               "Pro for life on the web app, from the moment you buy",
               "Pro for life on the iPhone and Android apps when they launch, planned by spring 2027",
@@ -30,9 +31,10 @@ export const legalEn: LegalStrings = {
           ],
         },
         {
-          h: "The phone apps",
+          h: "How you get access",
           body: [
-            "The phone apps aren't available yet. If they aren't available by {appsDeadline}, you can ask for a full refund (see the refund policy).",
+            "Right after you pay, {merchant} emails your receipt. Open the web app at {appUrl} and sign in with the same email you paid with: your access is there instantly. Nothing to download or install.",
+            "The iPhone and Android apps aren't available yet. When they launch, you sign in to them with the same email.",
           ],
         },
         {
@@ -73,6 +75,10 @@ export const legalEn: LegalStrings = {
           body: ["The French version of these terms is the official one. This English translation is for your convenience."],
         },
         {
+          h: "Refunds",
+          body: ["You can get a full refund within {refundDays} days of your purchase, for any reason. The refund policy explains how."],
+        },
+        {
           h: "Contact us",
           body: ["Write to {contactEmail}."],
         },
@@ -96,16 +102,10 @@ export const legalEn: LegalStrings = {
           ],
         },
         {
-          h: "If you join the waitlist",
-          body: [
-            "We collect your email and language, when and how you consented, the version of the consent wording, and the headline shown and source. We use them only to email you about the {app} launch.",
-            "Every email has an unsubscribe link. You can also withdraw your consent by writing to us.",
-          ],
-        },
-        {
           h: "If you buy",
           body: [
-            "{merchant} handles your payment. We never see your card number. We receive your email, the order number, the amount, the currency, your language, the headline shown and the source. We use them to turn on Pro for your account, handle refunds and keep our records.",
+            "{merchant} (Paddle.com), our merchant of record, receives and processes your payment information: your name, email, country, billing address and payment method details. {merchant} uses it to take your payment, collect taxes, prevent fraud and send your receipt, under its own privacy policy (paddle.com/legal/privacy).",
+            "We never see your card number. {merchant} sends us your email, the order number, the amount, the currency and your country. We use them to give you access in the app, handle refunds and keep our records.",
           ],
         },
         {
@@ -122,8 +122,7 @@ export const legalEn: LegalStrings = {
             [
               "Supabase: database, sync and the site's functions. Its technical logs may hold IP addresses for a short time.",
               "GitHub Pages: hosts this site. GitHub may keep technical logs.",
-              "{merchant}: payment, taxes and receipts.",
-              "{emailTool}: sends the waitlist emails.",
+              "{merchant} (Paddle.com): receives your payment data as merchant of record, for payment, taxes, receipts and refunds.",
             ],
             "Some of these providers may handle information outside Quebec, including in the United States. Before trusting them with information, we check that it will be adequately protected.",
           ],
@@ -132,7 +131,6 @@ export const legalEn: LegalStrings = {
           h: "How long we keep your information",
           body: [
             [
-              "Waitlist: until you unsubscribe, or at most one year after the phone apps launch.",
               "Purchases: six years, as tax law requires.",
               "Sync: as long as you use it. Write to us and we'll delete your account and synced data.",
               "Visit counts: they hold no personal information.",
@@ -169,19 +167,13 @@ export const legalEn: LegalStrings = {
       lead: "If {app} isn't right for you, we refund you. That simple.",
       sections: [
         {
-          h: "Within {refundDays} days",
-          body: ["You can ask for a full refund within {refundDays} days of your purchase, without giving a reason."],
-        },
-        {
-          h: "If the phone apps are late",
-          body: [
-            "If the iPhone and Android apps aren't available by {appsDeadline}, you can ask for a full refund, even after {refundDays} days, until 60 days after that date.",
-          ],
+          h: "{refundDays}-day refund",
+          body: ["Every purchase can be refunded in full within {refundDays} days, for any reason. No conditions, no questions."],
         },
         {
           h: "How to ask",
           body: [
-            "Write to {contactEmail} from the email you bought with, or reply to the {merchant} receipt. The refund goes back to your original payment method, usually within 5 to 10 business days.",
+            "Ask through {merchant} at paddle.net: look up your order with the email you bought with and request a refund. Or write to {contactEmail}, or reply to the {merchant} receipt. The refund goes back to your original payment method, usually within 5 to 10 business days.",
             "After the refund, Pro is removed from your account. Your plans stay on your device and you can still export them.",
           ],
         },
@@ -204,7 +196,7 @@ export const legalEn: LegalStrings = {
         {
           h: "Sync",
           body: [
-            "Sync across your devices is included for {syncTerm}. Before that period ends, we'll write to you {notice} ahead to explain your options. The app keeps working on your device, with or without sync.",
+            "Sync across your devices is included for {syncTerm}. If that ever changes, we'll write to you {notice} ahead to explain your options. The app keeps working on your device, with or without sync.",
           ],
         },
         {
@@ -222,6 +214,26 @@ export const legalEn: LegalStrings = {
           body: [
             "Any separate products other than {app}. The purchase is personal and tied to your email: it can't be resold or transferred.",
           ],
+        },
+      ],
+    },
+    contact: {
+      title: "Contact",
+      lead: "Questions about {app}, your order or a refund? Write to us, we're happy to help.",
+      sections: [
+        {
+          h: "Email",
+          body: ["{contactEmail}. We answer within two business days, in French or English."],
+        },
+        {
+          h: "Orders and refunds",
+          body: [
+            "{merchant} is the merchant of record for every order. For a receipt, a payment question or a refund, go to paddle.net or reply to your {merchant} receipt. You can also simply write to us: a full refund within {refundDays} days is always yes.",
+          ],
+        },
+        {
+          h: "Who we are",
+          body: ["{app} is made and sold by {seller}, a sole proprietor in Quebec, Canada."],
         },
       ],
     },

@@ -1,6 +1,6 @@
-# {{APP_NAME}} site
+# Rebalance site
 
-The bilingual pre-sale landing page for {{APP_NAME}} (the Cadence app). The brief and task list are in the app repo:
+The bilingual pre-sale landing page for Rebalance (the Cadence app). The brief and task list are in the app repo:
 `cadence2/docs/BRIEF-sprints-0-1.md` and `cadence2/docs/PLAN.md` (Sprint 0).
 
 Static Vite + TypeScript, no framework. `/fr/` and `/en/` are rendered to plain HTML at build time from the
@@ -43,7 +43,7 @@ npm run links -- https://your-domain.ca   # tagged ?src= links
 
 ## Before launch
 
-- Fill in `src/config.ts` and replace `{{APP_NAME}}`.
+- Fill in `src/config.ts` and replace `Rebalance`.
 - Set repository variables `VITE_SITE_URL` (the domain, for hreflang links), `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`.
 - In GitHub: Settings → Pages → Source: GitHub Actions; add the custom domain once DNS points at Pages. The site assumes it is served from the domain root.
 - Put the clip in `public/` and swap the placeholder in `src/render/landing.ts` for a `<video muted playsinline loop>` that only autoplays without reduced motion.

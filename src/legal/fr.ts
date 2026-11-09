@@ -1,6 +1,6 @@
 import type { LegalStrings } from "./types";
 
-// DRAFT for JP's review (and ideally a lawyer's). Canadian French; this version prevails.
+// Canadian French; this version prevails.
 export const legalFr: LegalStrings = {
   updated: "Dernière mise à jour : {legalUpdated}",
   readOther: "Read in English",
@@ -12,13 +12,14 @@ export const legalFr: LegalStrings = {
         {
           h: "Qui te vend {app}",
           body: [
-            "{app} est offert par {seller}, au Québec. Le paiement est traité par {merchant}, notre revendeur officiel : c'est lui qui encaisse le paiement, perçoit les taxes et t'envoie le reçu. Ses propres conditions s'appliquent au paiement.",
+            "{app} est conçu et vendu par {seller}, entreprise individuelle au Québec, Canada, qui développe et exploite {app}.",
+            "Notre processus de commande est assuré par notre revendeur en ligne Paddle.com. Paddle.com est le marchand officiel (Merchant of Record) pour toutes nos commandes. Paddle répond à toutes les demandes du service à la clientèle et gère les retours. C'est lui qui encaisse le paiement, perçoit les taxes et t'envoie le reçu; ses propres conditions d'achat s'appliquent aussi au paiement.",
           ],
         },
         {
           h: "Ce que tu achètes",
           body: [
-            "Le prix de lancement coûte {price} $ CA une seule fois, plus les taxes applicables. Il est offert jusqu'au 20 décembre 2026. Il comprend :",
+            "Le prix de lancement coûte {price} $ US une seule fois, plus les taxes applicables. Il est offert jusqu'au 20 décembre 2026. Il comprend :",
             [
               "Pro à vie sur l'application Web, dès l'achat",
               "Pro à vie sur les applications iPhone et Android, à leur sortie, prévue d'ici le printemps 2027",
@@ -29,9 +30,10 @@ export const legalFr: LegalStrings = {
           ],
         },
         {
-          h: "Les applications mobiles",
+          h: "Comment tu obtiens l'accès",
           body: [
-            "Les applications mobiles ne sont pas encore offertes. Si elles ne sont pas disponibles au plus tard le {appsDeadline}, tu peux demander un remboursement complet (voir la politique de remboursement).",
+            "Tout de suite après ton paiement, {merchant} t'envoie ton reçu par courriel. Ouvre l'application Web à {appUrl} et connecte-toi avec le courriel utilisé pour payer : ton accès est là instantanément. Rien à télécharger ni à installer.",
+            "Les applications iPhone et Android ne sont pas encore offertes. À leur sortie, tu t'y connectes avec le même courriel.",
           ],
         },
         {
@@ -74,6 +76,10 @@ export const legalFr: LegalStrings = {
           ],
         },
         {
+          h: "Remboursements",
+          body: ["Tu peux obtenir un remboursement complet dans les {refundDays} jours suivant ton achat, peu importe la raison. La politique de remboursement explique comment."],
+        },
+        {
           h: "Nous joindre",
           body: ["Écris-nous à {contactEmail}."],
         },
@@ -97,16 +103,10 @@ export const legalFr: LegalStrings = {
           ],
         },
         {
-          h: "Si tu t'inscris à la liste d'attente",
-          body: [
-            "On recueille ton courriel et ta langue, la date et la façon dont tu as consenti, la version du texte de consentement, ainsi que le titre affiché et la provenance. On s'en sert uniquement pour t'écrire au sujet du lancement de {app}.",
-            "Chaque courriel contient un lien de désabonnement. Tu peux aussi retirer ton consentement en nous écrivant.",
-          ],
-        },
-        {
           h: "Si tu achètes",
           body: [
-            "{merchant} traite ton paiement. On ne voit jamais ton numéro de carte. On reçoit ton courriel, le numéro de commande, le montant, la devise, ta langue, le titre affiché et la provenance. On s'en sert pour activer Pro sur ton compte, gérer les remboursements et tenir nos registres.",
+            "{merchant} (Paddle.com), notre marchand officiel, reçoit et traite tes renseignements de paiement : ton nom, ton courriel, ton pays, ton adresse de facturation et les détails de ton moyen de paiement. {merchant} s'en sert pour encaisser ton paiement, percevoir les taxes, prévenir la fraude et t'envoyer ton reçu, selon sa propre politique de confidentialité (paddle.com/legal/privacy).",
+            "On ne voit jamais ton numéro de carte. {merchant} nous transmet ton courriel, le numéro de commande, le montant, la devise et ton pays. On s'en sert pour te donner accès dans l'application, gérer les remboursements et tenir nos registres.",
           ],
         },
         {
@@ -123,8 +123,7 @@ export const legalFr: LegalStrings = {
             [
               "Supabase : base de données, synchronisation et fonctions du site. Ses journaux techniques peuvent contenir des adresses IP pendant une courte période.",
               "GitHub Pages : hébergement du site. GitHub peut garder des journaux techniques.",
-              "{merchant} : paiement, taxes et reçus.",
-              "{emailTool} : envoi des courriels de la liste d'attente.",
+              "{merchant} (Paddle.com) : reçoit tes données de paiement à titre de marchand officiel, pour le paiement, les taxes, les reçus et les remboursements.",
             ],
             "Certains de ces fournisseurs peuvent traiter des renseignements à l'extérieur du Québec, y compris aux États-Unis. Avant de leur confier des renseignements, on vérifie qu'ils seront protégés adéquatement.",
           ],
@@ -133,7 +132,6 @@ export const legalFr: LegalStrings = {
           h: "Combien de temps on garde tes renseignements",
           body: [
             [
-              "Liste d'attente : jusqu'à ton désabonnement, ou au plus tard un an après le lancement des applications mobiles.",
               "Achats : six ans, comme l'exigent les lois fiscales.",
               "Synchronisation : tant que tu l'utilises. Écris-nous pour qu'on supprime ton compte et tes données synchronisées.",
               "Décompte des visites : il ne contient aucun renseignement personnel.",
@@ -170,21 +168,15 @@ export const legalFr: LegalStrings = {
       lead: "Si {app} ne te convient pas, on te rembourse. Simple comme ça.",
       sections: [
         {
-          h: "Dans les {refundDays} jours",
+          h: "Remboursement de {refundDays} jours",
           body: [
-            "Tu peux demander un remboursement complet dans les {refundDays} jours suivant ton achat, sans avoir à donner de raison.",
-          ],
-        },
-        {
-          h: "Si les applications mobiles tardent",
-          body: [
-            "Si les applications iPhone et Android ne sont pas disponibles au plus tard le {appsDeadline}, tu peux demander un remboursement complet, même après {refundDays} jours, jusqu'à 60 jours après cette date.",
+            "Chaque achat peut être remboursé en entier dans les {refundDays} jours, peu importe la raison. Aucune condition, aucune question.",
           ],
         },
         {
           h: "Comment faire",
           body: [
-            "Écris à {contactEmail} avec le courriel utilisé pour l'achat, ou réponds au reçu de {merchant}. Le remboursement est fait sur ton moyen de paiement d'origine, habituellement en 5 à 10 jours ouvrables.",
+            "Fais ta demande auprès de {merchant} à paddle.net : retrouve ta commande avec le courriel utilisé pour l'achat et demande le remboursement. Tu peux aussi écrire à {contactEmail} ou répondre au reçu de {merchant}. Le remboursement est fait sur ton moyen de paiement d'origine, habituellement en 5 à 10 jours ouvrables.",
             "Après le remboursement, Pro est retiré de ton compte. Tes plans restent sur ton appareil et tu peux toujours les exporter.",
           ],
         },
@@ -209,7 +201,7 @@ export const legalFr: LegalStrings = {
         {
           h: "La synchronisation",
           body: [
-            "La synchronisation entre tes appareils est incluse pendant {syncTerm}. Avant la fin de cette période, on t'écrira {notice} à l'avance pour t'expliquer tes choix. L'application continue de fonctionner sur ton appareil, avec ou sans synchronisation.",
+            "La synchronisation entre tes appareils est incluse pendant {syncTerm}. Si ça devait changer, on t'écrira {notice} à l'avance pour t'expliquer tes choix. L'application continue de fonctionner sur ton appareil, avec ou sans synchronisation.",
           ],
         },
         {
@@ -229,6 +221,26 @@ export const legalFr: LegalStrings = {
           body: [
             "D'éventuels produits distincts de {app}. L'achat est personnel et lié à ton courriel : il ne peut pas être revendu ni transféré.",
           ],
+        },
+      ],
+    },
+    contact: {
+      title: "Nous joindre",
+      lead: "Une question sur {app}, ta commande ou un remboursement? Écris-nous, ça nous fait plaisir.",
+      sections: [
+        {
+          h: "Courriel",
+          body: ["{contactEmail}. On répond en deux jours ouvrables au plus, en français ou en anglais."],
+        },
+        {
+          h: "Commandes et remboursements",
+          body: [
+            "{merchant} est le marchand officiel de chaque commande. Pour un reçu, une question de paiement ou un remboursement, va à paddle.net ou réponds à ton reçu de {merchant}. Tu peux aussi simplement nous écrire : un remboursement complet dans les {refundDays} jours, c'est toujours oui.",
+          ],
+        },
+        {
+          h: "Qui on est",
+          body: ["{app} est conçu et vendu par {seller}, entreprise individuelle au Québec, Canada."],
         },
       ],
     },

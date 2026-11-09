@@ -130,32 +130,16 @@ p { margin: 0; }
 .balance-title { font-weight: 700; font-size: 15px; }
 .balance-body { font-size: 14px; color: var(--muted); }
 
-/* offer + waitlist */
+/* offer + how you get it */
 .offer-grid { display: grid; grid-template-columns: 1fr; gap: 16px; align-items: stretch; }
 .offer { display: flex; flex-direction: column; gap: 16px; padding: 28px; }
 .price { display: flex; align-items: baseline; gap: 10px; }
 .amount { font-size: 64px; font-weight: 800; line-height: 1; letter-spacing: -0.02em; }
 .once { font-size: 20px; }
 .bullets { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
-.waitlist { border-color: var(--line); display: flex; flex-direction: column; gap: 14px; padding: 28px; }
-.waitlist h3 { font-size: 24px; }
-.wl-form { display: grid; gap: 12px; }
-.wl-form input[type="email"] {
-  width: 100%;
-  min-height: 48px;
-  padding: 10px 12px;
-  border: 1.5px solid var(--ink);
-  border-radius: 2px;
-  background: #fff;
-  color: var(--ink);
-  font: 17px var(--serif);
-}
-.wl-form input[type="email"]::placeholder { color: #8a7d6d; }
-.consent { display: grid; grid-template-columns: 24px 1fr; gap: 10px; align-items: start; font-size: 15px; cursor: pointer; }
-.consent input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--ink); }
-.msg { min-height: 1.5em; font-size: 15px; }
-/* errors in ink with a marker, never red */
-.msg[data-kind="error"]::before { content: "→ "; }
+.access { border-color: var(--line); display: flex; flex-direction: column; gap: 14px; padding: 28px; }
+.access h3 { font-size: 24px; }
+.access-steps { margin: 0; padding-left: 22px; display: grid; gap: 10px; overflow-wrap: anywhere; }
 
 /* faq */
 .faq-grid { display: grid; grid-template-columns: 1fr; gap: 28px 48px; }

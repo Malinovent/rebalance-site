@@ -2,7 +2,7 @@ import type { Lang } from "../lib/lang";
 
 /**
  * Every piece of text on the site. Tokens in braces are filled from CONFIG at render time:
- * {app} {seller} {syncTerm} {notice} {merchant} {privacyOfficer} {contactEmail} {syncRegion} {price}
+ * {app} {seller} {syncTerm} {notice} {merchant} {privacyOfficer} {contactEmail} {syncRegion} {price} {refundDays} {appUrl}
  */
 export type Strings = {
   htmlLang: string;
@@ -16,13 +16,15 @@ export type Strings = {
     headlineB: string;
     subline: string;
     buy: string;
-    waitlist: string;
+    openApp: string;
     note: string;
     clipTitle: string;
     clipNote: string;
   };
   how: {
     title: string;
+    /** What the product is and who it's for. */
+    intro: string;
     stepLabel: string;
     steps: { title: string; body: string }[];
     areas: { rest: string; work: string; projects: string };
@@ -42,28 +44,15 @@ export type Strings = {
     refundLink: string;
     lifetimeLink: string;
   };
-  waitlist: {
-    title: string;
-    body: string;
-    emailLabel: string;
-    emailPlaceholder: string;
-    consent: string;
-    submit: string;
-    note: string;
-    errorEmail: string;
-    errorConsent: string;
-    sending: string;
-    done: string;
-    failed: string;
-    notOpen: string;
-  };
+  /** How the buyer gets access after paying. */
+  access: { title: string; steps: string[]; openApp: string; note: string };
   faq: { title: string; items: { q: string; a: string }[] };
   footer: {
     links: { terms: string; privacy: string; refunds: string; lifetime: string; contact: string };
     officer: string;
     disclaimer: string;
   };
-  paths: { terms: string; privacy: string; refunds: string; lifetime: string };
+  paths: { terms: string; privacy: string; refunds: string; lifetime: string; contact: string };
 };
 
 export type Dict = Record<Lang, Strings>;

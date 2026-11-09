@@ -45,7 +45,7 @@ export function renderFooter(lang: Lang): string {
         <li><a href="${p.privacy}">${t(s.footer.links.privacy)}</a></li>
         <li><a href="${p.refunds}">${t(s.footer.links.refunds)}</a></li>
         <li><a href="${p.lifetime}">${t(s.footer.links.lifetime)}</a></li>
-        <li><a href="mailto:${esc(CONFIG.contactEmail)}">${t(s.footer.links.contact)}</a></li>
+        <li><a href="${p.contact}">${t(s.footer.links.contact)}</a></li>
       </ul>
       <p class="small">${t(s.footer.officer)}</p>
       <p class="small">${t(s.footer.disclaimer)}</p>

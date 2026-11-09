@@ -1,3 +1,4 @@
+import { CONFIG } from "../config";
 import { fill, strings } from "../i18n";
 import type { Lang } from "../lib/lang";
 import { esc, renderFooter, renderHeader } from "./chrome";
@@ -72,7 +73,7 @@ ${renderHeader(lang, { onLanding: true, otherPath: `/${other}/` })}
           <p class="lead">${t(s.hero.subline)}</p>
           <div class="actions">
             <a class="btn btn-dark" href="#offer">${t(s.hero.buy)}</a>
-            <a class="btn btn-light" href="#waitlist">${t(s.hero.waitlist)}</a>
+            <a class="btn btn-light" href="${esc(CONFIG.appUrl)}">${t(s.hero.openApp)}</a>
           </div>
           <p class="small">${t(s.hero.note)}</p>
         </div>
@@ -89,6 +90,7 @@ ${renderHeader(lang, { onLanding: true, otherPath: `/${other}/` })}
     <section id="how" class="band" aria-labelledby="how-title">
       <div class="wrap">
         <h2 id="how-title">${t(s.how.title)}</h2>
+        <p class="lead">${t(s.how.intro)}</p>
         <ol class="steps">${steps}
         </ol>
         <p class="phone-line">${t(s.how.phoneLine)}</p>
@@ -106,18 +108,11 @@ ${renderHeader(lang, { onLanding: true, otherPath: `/${other}/` })}
             <button type="button" class="btn btn-dark btn-block" data-checkout>${t(s.offer.buy)}</button>
             <p class="small">${finePrint}</p>
           </div>
-          <div class="card waitlist" id="waitlist">
-            <h3>${t(s.waitlist.title)}</h3>
-            <p>${t(s.waitlist.body)}</p>
-            <form class="wl-form" novalidate data-waitlist>
-              <label class="eyebrow" for="wl-email">${t(s.waitlist.emailLabel)}</label>
-              <input id="wl-email" name="email" type="email" autocomplete="email" inputmode="email" required placeholder="${t(s.waitlist.emailPlaceholder)}" aria-describedby="wl-msg">
-              <label class="consent"><input type="checkbox" name="consent" required><span>${t(s.waitlist.consent)}</span></label>
-              <input type="hidden" name="lang" value="${lang}">
-              <button type="submit" class="btn btn-light btn-block">${t(s.waitlist.submit)}</button>
-              <p class="msg" id="wl-msg" role="status" aria-live="polite"></p>
-            </form>
-            <p class="small">${t(s.waitlist.note)}</p>
+          <div class="card access" id="access">
+            <h3>${t(s.access.title)}</h3>
+            <ol class="access-steps">${s.access.steps.map((st) => `<li>${t(st)}</li>`).join("")}</ol>
+            <a class="btn btn-light btn-block" href="${esc(CONFIG.appUrl)}">${t(s.access.openApp)}</a>
+            <p class="small">${t(s.access.note)}</p>
           </div>
         </div>
       </div>
@@ -133,17 +128,4 @@ ${renderHeader(lang, { onLanding: true, otherPath: `/${other}/` })}
   </main>
 
 ${renderFooter(lang)}`;
-}
-
-/** Text the client script needs (form messages), embedded as JSON in the page. */
-export function clientStrings(lang: Lang): Record<string, string> {
-  const w = strings(lang).waitlist;
-  return {
-    errorEmail: w.errorEmail,
-    errorConsent: w.errorConsent,
-    sending: w.sending,
-    done: w.done,
-    failed: w.failed,
-    notOpen: w.notOpen,
-  };
 }

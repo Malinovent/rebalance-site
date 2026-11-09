@@ -5,11 +5,8 @@ import { LEGAL_KEYS, type LegalKey } from "../legal/types";
 import { headlineBootScript } from "../lib/headline";
 import type { Lang } from "../lib/lang";
 import { esc } from "./chrome";
-import { clientStrings, renderLanding } from "./landing";
+import { renderLanding } from "./landing";
 import { renderLegal } from "./legal";
-
-/** JSON safe to embed in a <script> element. */
-const jsonForScript = (v: unknown) => JSON.stringify(v).replace(/</g, "\\u003c");
 
 /** hreflang links need absolute URLs; skipped until the domain exists (VITE_SITE_URL). */
 const alternates = (siteUrl: string, fr: string, en: string, xDefault?: string) => {
@@ -49,7 +46,6 @@ export function renderDocument(lang: Lang, siteUrl = ""): string {
     description: fill(s.description, lang),
     altLinks: alternates(siteUrl, "/fr/", "/en/", "/"),
     head: `  <script>${headlineBootScript()}</script>
-  <script type="application/json" id="i18n">${jsonForScript(clientStrings(lang))}</script>
 `,
     script: "/src/main.ts",
     body: renderLanding(lang),

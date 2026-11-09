@@ -19,14 +19,16 @@ export const en: Strings = {
     headlineA: "A weekly planner designed for ADHD brains",
     headlineB: "A week that doesn't eat your rest",
     subline: "Set a floor for rest and people, a ceiling for work, and plan your week in minutes.",
-    buy: "Get the early bird · ${price} once",
-    waitlist: "Join the waitlist",
+    buy: "Get the early bird · ${price} USD once",
+    openApp: "Open the web app",
     note: "The early-bird price ends Dec 20, 2026. Web app today, phone apps by spring 2027.",
     clipTitle: "30-second clip of the app",
     clipNote: "Muted, self-hosted, recorded on a phone",
   },
   how: {
     title: "How it works",
+    intro:
+      "{app} is a weekly planner that runs in your browser, on computer and phone. You decide how much time each part of your life should get, drag blocks into your week, and see at a glance whether the week holds. It's for anyone whose work week keeps eating their rest and their people: students, parents, freelancers, busy brains.",
     stepLabel: "Step",
     steps: [
       {
@@ -51,7 +53,7 @@ export const en: Strings = {
   offer: {
     title: "Get in early",
     eyebrow: "Early bird · until Dec 20, 2026",
-    price: "${price}",
+    price: "${price} USD",
     once: "once",
     bullets: [
       "Pro for life on the web app and the phone apps",
@@ -60,24 +62,19 @@ export const en: Strings = {
       "Export your data any time",
     ],
     buy: "Get the early bird",
-    finePrint: "Secure checkout by {merchant}. Read the {refundLink} and {lifetimeLink}.",
+    finePrint: "Secure checkout by {merchant}, our reseller and merchant of record. Taxes added at checkout where they apply. Full refund within {refundDays} days, no questions asked: read the {refundLink} and {lifetimeLink}.",
     refundLink: "refund policy",
     lifetimeLink: "what lifetime means",
   },
-  waitlist: {
-    title: "Not ready to buy?",
-    body: "Join the waitlist and hear when the phone apps launch.",
-    emailLabel: "Email",
-    emailPlaceholder: "you@example.com",
-    consent: "Yes, email me from {seller} about the {app} launch. I can unsubscribe any time.",
-    submit: "Join the waitlist",
-    note: "We never ask about your health. No ads, no trackers.",
-    errorEmail: "Enter a valid email address.",
-    errorConsent: "Tick the box to get our emails.",
-    sending: "Sending…",
-    done: "You're on the list. We'll write when it launches.",
-    failed: "That didn't work. Try again in a moment.",
-    notOpen: "The waitlist opens soon.",
+  access: {
+    title: "How you get it",
+    steps: [
+      "Pay once through {merchant}'s secure checkout. {merchant} emails you a receipt right away.",
+      "Open the web app at {appUrl} on any computer or phone.",
+      "Sign in with the same email you paid with. Your early-bird access is there instantly, nothing to install.",
+    ],
+    openApp: "Open the web app",
+    note: "No ads, no trackers. We never ask about your health.",
   },
   faq: {
     title: "Questions",
@@ -102,7 +99,7 @@ export const en: Strings = {
       lifetime: 'What "lifetime" means',
       contact: "Contact",
     },
-    officer: "Person in charge of personal information: {privacyOfficer}, {contactEmail}.",
+    officer: "{app} is made and sold by {seller}, sole proprietor, Quebec, Canada. Orders are processed by {merchant}, merchant of record. Contact: {contactEmail}.",
     disclaimer: "A planning tool, not a medical device or treatment. © 2026 {seller}",
   },
   paths: {
@@ -110,5 +107,6 @@ export const en: Strings = {
     privacy: "/en/privacy/",
     refunds: "/en/refunds/",
     lifetime: "/en/lifetime/",
+    contact: "/en/contact/",
   },
 };

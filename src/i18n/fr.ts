@@ -21,14 +21,16 @@ export const fr: Strings = {
     headlineB: "Une semaine qui ne gruge pas ton repos",
     subline:
       "Fixe un minimum pour le repos et tes proches, un maximum pour le travail, et planifie ta semaine en quelques minutes.",
-    buy: "Prix de lancement · {price} $ une fois",
-    waitlist: "Rejoindre la liste d'attente",
+    buy: "Prix de lancement · {price} $ US une fois",
+    openApp: "Ouvrir l'application Web",
     note: "Le prix de lancement prend fin le 20 décembre 2026. L'application Web dès aujourd'hui, les applications mobiles d'ici le printemps 2027.",
     clipTitle: "Extrait de 30 secondes de l'application",
     clipNote: "Muet, hébergé chez nous, filmé sur un téléphone",
   },
   how: {
     title: "Comment ça marche",
+    intro:
+      "{app} est un planificateur de semaine qui fonctionne dans ton navigateur, sur ordinateur et sur téléphone. Tu décides combien de temps chaque sphère de ta vie devrait recevoir, tu glisses des blocs dans ta semaine et tu vois d'un coup d'œil si elle tient la route. Pour toutes les personnes dont le travail gruge le repos et les proches : étudiants, parents, travailleurs autonomes, cerveaux bien occupés.",
     stepLabel: "Étape",
     steps: [
       {
@@ -53,7 +55,7 @@ export const fr: Strings = {
   offer: {
     title: "Embarque tôt",
     eyebrow: "Prix de lancement · jusqu'au 20 décembre 2026",
-    price: "{price} $",
+    price: "{price} $ US",
     once: "une fois",
     bullets: [
       "Pro à vie sur l'application Web et les applications mobiles",
@@ -62,24 +64,19 @@ export const fr: Strings = {
       "Exporte tes données en tout temps",
     ],
     buy: "Obtenir le prix de lancement",
-    finePrint: "Paiement sécurisé par {merchant}. Lis la {refundLink} et {lifetimeLink}.",
+    finePrint: "Paiement sécurisé par {merchant}, notre revendeur et marchand officiel. Taxes ajoutées au paiement s'il y a lieu. Remboursement complet dans les {refundDays} jours, sans question : lis la {refundLink} et {lifetimeLink}.",
     refundLink: "politique de remboursement",
     lifetimeLink: "ce que « à vie » veut dire",
   },
-  waitlist: {
-    title: "Pas prêt à acheter?",
-    body: "Rejoins la liste d'attente pour savoir quand les applications mobiles sortiront.",
-    emailLabel: "Courriel",
-    emailPlaceholder: "toi@exemple.com",
-    consent: "Oui, je veux recevoir des courriels de {seller} au sujet du lancement de {app}. Je peux me désabonner en tout temps.",
-    submit: "Rejoindre la liste d'attente",
-    note: "On ne te pose jamais de questions sur ta santé. Pas de pubs, pas de traceurs.",
-    errorEmail: "Entre une adresse courriel valide.",
-    errorConsent: "Coche la case pour recevoir nos courriels.",
-    sending: "Envoi…",
-    done: "C'est noté. On t'écrira au lancement.",
-    failed: "Ça n'a pas marché. Réessaie dans un moment.",
-    notOpen: "La liste d'attente ouvre bientôt.",
+  access: {
+    title: "Comment l'obtenir",
+    steps: [
+      "Paie une seule fois par le paiement sécurisé de {merchant}. {merchant} t'envoie un reçu par courriel tout de suite.",
+      "Ouvre l'application Web à {appUrl}, sur n'importe quel ordinateur ou téléphone.",
+      "Connecte-toi avec le courriel utilisé pour payer. Ton accès au prix de lancement est là instantanément, rien à installer.",
+    ],
+    openApp: "Ouvrir l'application Web",
+    note: "Pas de pubs, pas de traceurs. On ne te pose jamais de questions sur ta santé.",
   },
   faq: {
     title: "Questions",
@@ -107,7 +104,7 @@ export const fr: Strings = {
       lifetime: "Ce que « à vie » veut dire",
       contact: "Nous joindre",
     },
-    officer: "Responsable de la protection des renseignements personnels : {privacyOfficer}, {contactEmail}.",
+    officer: "{app} est conçu et vendu par {seller}, entreprise individuelle, Québec, Canada. Les commandes sont traitées par {merchant}, marchand officiel. Nous joindre : {contactEmail}.",
     disclaimer: "Un outil de planification, pas un dispositif médical ni un traitement. © 2026 {seller}",
   },
   paths: {
@@ -115,5 +112,6 @@ export const fr: Strings = {
     privacy: "/fr/confidentialite/",
     refunds: "/fr/remboursements/",
     lifetime: "/fr/a-vie/",
+    contact: "/fr/contact/",
   },
 };

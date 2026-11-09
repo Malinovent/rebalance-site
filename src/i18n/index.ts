@@ -18,11 +18,12 @@ export function fill(text: string, lang: Lang): string {
     privacyOfficer: CONFIG.privacyOfficer,
     contactEmail: CONFIG.contactEmail,
     syncRegion: CONFIG.syncRegion[lang],
-    price: String(CONFIG.priceCad),
+    price: String(CONFIG.priceUsd),
     refundDays: String(CONFIG.refundDays),
-    appsDeadline: CONFIG.appsDeadline[lang],
     legalUpdated: CONFIG.legalUpdated[lang],
-    emailTool: CONFIG.emailTool,
+    appUrl: CONFIG.appUrl,
   };
-  return text.replace(/\{(\w+)\}/g, (m, key: string) => values[key] ?? m);
+  const once = (t: string) => t.replace(/\{(\w+)\}/g, (m, key: string) => values[key] ?? m);
+  // Twice, so a value may itself hold a token (syncTerm holds {app}).
+  return once(once(text));
 }
