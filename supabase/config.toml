@@ -8,3 +8,7 @@ verify_jwt = false
 # Protected by the SCOREBOARD_TOKEN secret instead of a Supabase sign-in.
 [functions.scoreboard]
 verify_jwt = false
+
+# Called by Paddle, not a signed-in user: protected by the Paddle-Signature check instead.
+[functions.paddle-webhook]
+verify_jwt = false

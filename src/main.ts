@@ -3,7 +3,9 @@ import "@fontsource-variable/fraunces/opsz.css";
 import "@fontsource/spline-sans-mono/latin-400.css";
 import "@fontsource/spline-sans-mono/latin-500.css";
 import "./styles.css";
+import { CONFIG } from "./config";
 import { functionsBase, sendHit } from "./lib/api";
+import { PADDLE_JS, checkoutOptions, paddleSetup } from "./lib/checkout";
 import { readHeadline } from "./lib/headline";
 import { isLang } from "./lib/lang";
 import { wireLangSwitch } from "./lib/langSwitch";
@@ -35,3 +37,48 @@ try {
 if (!counted) sendHit(base, { page: lang, headline, src });
 
 wireLangSwitch(document, location.search);
+
+// Buy button → Paddle's overlay checkout. Paddle.js loads on the first click only.
+type PaddleJs = {
+  Environment: { set(env: string): void };
+  Initialize(o: { token: string }): void;
+  Checkout: { open(o: unknown): void };
+};
+const paddle = paddleSetup({
+  token: import.meta.env.VITE_PADDLE_CLIENT_TOKEN,
+  priceId: import.meta.env.VITE_PADDLE_PRICE_ID,
+  mode: import.meta.env.VITE_PADDLE_ENV,
+});
+let paddleReady: Promise<PaddleJs> | null = null;
+const loadPaddle = (): Promise<PaddleJs> =>
+  (paddleReady ??= new Promise<PaddleJs>((resolve, reject) => {
+    const s = document.createElement("script");
+    s.src = PADDLE_JS;
+    s.onload = () => {
+      const P = (window as unknown as { Paddle?: PaddleJs }).Paddle;
+      if (!P || !paddle) return reject(new Error("paddle.js"));
+      if (paddle.sandbox) P.Environment.set("sandbox");
+      P.Initialize({ token: paddle.token });
+      resolve(P);
+    };
+    s.onerror = () => {
+      paddleReady = null; // try again on the next click
+      reject(new Error("paddle.js"));
+    };
+    document.head.appendChild(s);
+  }));
+if (paddle) {
+  for (const btn of document.querySelectorAll<HTMLButtonElement>("[data-checkout]")) {
+    btn.addEventListener("click", async () => {
+      btn.disabled = true;
+      try {
+        const P = await loadPaddle();
+        P.Checkout.open(checkoutOptions(paddle, { lang, headline, src, appUrl: CONFIG.appUrl }));
+      } catch {
+        /* blocked or offline: the button works again for another try */
+      } finally {
+        btn.disabled = false;
+      }
+    });
+  }
+}

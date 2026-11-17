@@ -31,6 +31,9 @@ jobs:
           VITE_SITE_URL: ${{ vars.VITE_SITE_URL }}
           VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
+          VITE_PADDLE_CLIENT_TOKEN: ${{ vars.VITE_PADDLE_CLIENT_TOKEN }}
+          VITE_PADDLE_PRICE_ID: ${{ vars.VITE_PADDLE_PRICE_ID }}
+          VITE_PADDLE_ENV: ${{ vars.VITE_PADDLE_ENV }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

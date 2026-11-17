@@ -32,6 +32,9 @@ create table if not exists public.entitlements (
   source_order_id text,
   updated_at      timestamptz not null default now()
 );
+-- `pro`: Pro (sync) given by hand, or kept by people who synced before Pro existed (the app's
+-- supabase/schema.sql). Pro = pro or early_bird; a refund clears early_bird only.
+alter table public.entitlements add column if not exists pro boolean not null default false;
 alter table public.entitlements enable row level security;
 
 drop policy if exists "entitlements: read own" on public.entitlements;
