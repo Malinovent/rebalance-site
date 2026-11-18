@@ -18,8 +18,11 @@ export const CONFIG = {
   contactEmail: "jphil.provost@outlook.com",
   /** Where synced data is stored. Read after "stored" / "stockés". */
   syncRegion: { fr: "chez Supabase, notre fournisseur de base de données", en: "with Supabase, our database provider" },
-  /** The web app the buyer signs in to. Its address stays put: people's saved weeks live there. */
-  appUrl: "https://malinovent.github.io/cadence/",
+  /**
+   * The web app (JP, 2026-11-18): on this domain, built into this site's deploy at /app/. The old
+   * address (malinovent.github.io/cadence/) stays up so people can bring their weeks over.
+   */
+  appUrl: "https://rebalanceweek.com/app/",
   /** Early-bird price, in US dollars, paid once. */
   priceUsd: 39,
   /** The year the early-bird price ends; dates themselves are in the strings. */

@@ -10,6 +10,7 @@ export const en: Strings = {
     how: "How it works",
     offer: "Early bird",
     faq: "Questions",
+    app: "Open the app",
     switchLang: "Français",
     switchLangLabel: "Lire cette page en français",
     earlyUntil: "Early bird until Dec 20",

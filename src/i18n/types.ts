@@ -9,7 +9,7 @@ export type Strings = {
   title: string;
   description: string;
   skipToContent: string;
-  nav: { how: string; offer: string; faq: string; switchLang: string; switchLangLabel: string; earlyUntil: string };
+  nav: { how: string; offer: string; faq: string; app: string; switchLang: string; switchLangLabel: string; earlyUntil: string };
   hero: {
     eyebrow: string;
     headlineA: string;

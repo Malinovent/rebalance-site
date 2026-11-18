@@ -56,6 +56,7 @@ p { margin: 0; }
 .top nav a { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; padding: 10px 0; }
 .top nav a:hover { text-decoration: underline; }
 .top nav .lang-switch { border: 1.5px solid var(--ink); padding: 9px 12px; }
+.top nav .app-link { background: var(--ink); color: var(--paper); border: 1.5px solid var(--ink); padding: 9px 12px; }
 
 /* hero */
 .hero { padding: 64px 0 72px; }

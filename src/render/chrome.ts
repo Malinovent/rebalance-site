@@ -27,6 +27,7 @@ export function renderHeader(lang: Lang, opts: { onLanding: boolean; otherPath: 
         <a href="${pre}#how">${t(s.nav.how)}</a>
         <a href="${pre}#offer">${t(s.nav.offer)}</a>
         <a href="${pre}#faq">${t(s.nav.faq)}</a>
+        <a class="app-link" href="${esc(CONFIG.appUrl)}">${t(s.nav.app)}</a>
         <a class="lang-switch" href="${esc(opts.otherPath)}" hreflang="${htmlLang(other)}" lang="${htmlLang(other)}" data-lang="${other}" aria-label="${t(s.nav.switchLangLabel)}">${t(s.nav.switchLang)}</a>
       </nav>
     </div>

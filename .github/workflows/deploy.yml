@@ -1,9 +1,14 @@
 name: Deploy to GitHub Pages
 
+# rebalanceweek.com (JP, 2026-11-18): this site at the root and the app at /app/, one deploy.
+# The app comes from Malinovent/cadence (main) at build time. Its deploy asks for a rebuild here
+# (repository_dispatch "app-updated") each time the app changes; "Run workflow" does it by hand.
 on:
   push:
     branches: [main]
   workflow_dispatch:
+  repository_dispatch:
+    types: [app-updated]
 
 permissions:
   contents: read
@@ -19,10 +24,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: Malinovent/cadence
+          ref: main
+          path: app
       - uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            app/package-lock.json
       - run: npm ci
       - run: npm test
       - run: npm run lint
@@ -34,6 +47,21 @@ jobs:
           VITE_PADDLE_CLIENT_TOKEN: ${{ vars.VITE_PADDLE_CLIENT_TOKEN }}
           VITE_PADDLE_PRICE_ID: ${{ vars.VITE_PADDLE_PRICE_ID }}
           VITE_PADDLE_ENV: ${{ vars.VITE_PADDLE_ENV }}
+      # The app at /app/. Its settings are this repo's APP_* variables (public values, the same as the
+      # cadence repo's VITE_* ones); separate names so the site's own Supabase use stays as it is.
+      - name: Build the app at /app/
+        working-directory: app
+        run: |
+          npm ci
+          npm run build
+        env:
+          VITE_BASE: /app/
+          VITE_SITE_URL: ${{ vars.VITE_SITE_URL }}
+          VITE_SUPABASE_URL: ${{ vars.APP_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ vars.APP_SUPABASE_ANON_KEY }}
+          VITE_SUPPORT_EMAIL: ${{ vars.APP_SUPPORT_EMAIL }}
+          VITE_AUTH_PROVIDERS: ${{ vars.APP_AUTH_PROVIDERS }}
+      - run: cp -r app/dist dist/app
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

@@ -11,6 +11,7 @@ export const fr: Strings = {
     how: "Comment ça marche",
     offer: "Prix de lancement",
     faq: "Questions",
+    app: "Ouvrir l'application",
     switchLang: "English",
     switchLangLabel: "Read this page in English",
     earlyUntil: "Prix de lancement jusqu'au 20 décembre",
